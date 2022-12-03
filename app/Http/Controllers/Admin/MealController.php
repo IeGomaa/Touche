@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\MealInterface;
-use App\Http\Requests\Admin\Meal\CreateMealRequest;
 use App\Http\Requests\Admin\Meal\DeleteMealRequest;
-use App\Http\Requests\Admin\Meal\EditMealRequest;
+use App\Http\Requests\Admin\Meal\MealRequest;
 
 class MealController extends Controller
 {
@@ -27,7 +26,7 @@ class MealController extends Controller
         return $this->mealInterface->create();
     }
 
-    public function store(CreateMealRequest $request)
+    public function store(MealRequest $request)
     {
         return $this->mealInterface->store($request);
     }
@@ -42,7 +41,7 @@ class MealController extends Controller
         return $this->mealInterface->update($meal_id);
     }
 
-    public function edit(EditMealRequest $request)
+    public function edit(MealRequest $request)
     {
         return $this->mealInterface->edit($request);
     }

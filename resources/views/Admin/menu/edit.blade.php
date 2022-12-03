@@ -47,6 +47,7 @@
                                     @method('PUT')
 
                                     <input type="hidden" name="id" value="{{$menu->id}}">
+
                                     <div class="form-group mb-4">
                                         <input type="text" name="title" value="{{old('title',$menu->title)}}" class="form-control @error('name') is-invalid @enderror" placeholder="Title">
                                     </div>
@@ -60,14 +61,20 @@
                                     @enderror
 
                                     <div class="btn-group bootstrap-select show-tick">
-
-                                        <select name="category_id" class="selectpicker" tabindex="-98">
+                                        <select name="category_id" class="selectpicker @error('category_id') is-invalid @enderror" tabindex="-98">
                                             @foreach($categories as $category)
                                                 <option value="{{old('$category_id',$category->id)}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
-
                                     </div>
+
+                                    @error('category_id')
+                                    <div class="alert alert-danger mt-1" role="alert">
+                                        <div class="alert-body">
+                                            {{ $message }}
+                                        </div>
+                                    </div>
+                                    @enderror
 
                                     <div class="form-group mb-4">
                                         <input type="text" name="price" value="{{old('price',$menu->price)}}" class="form-control @error('price') is-invalid @enderror" placeholder="Price">

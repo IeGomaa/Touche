@@ -58,10 +58,6 @@ class MenuRepository implements MenuInterface
     {
         $menu = $this->menuRecord($request->id);
 
-        if (!is_null($request->title)) {
-            $title = $request->title;
-        }
-
         if (!is_null($request->body)) {
             $body = $request->body;
         }
@@ -71,7 +67,7 @@ class MenuRepository implements MenuInterface
         }
 
         $menu->update([
-            'title' => (isset($title)) ? $title : $menu->title,
+            'title' => $request->title,
             'price' => $request->price,
             'body' => (isset($body)) ? $body : $menu->body,
             'category_id' => (isset($category_id)) ? $category_id : $menu->category_id

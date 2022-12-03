@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Meal;
+namespace App\Http\Requests\Admin\Menu;
 
-use App\Models\Meal;
+use App\Models\Menu;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditMealRequest extends FormRequest
+class MenuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,6 @@ class EditMealRequest extends FormRequest
      */
     public function rules()
     {
-        return array_merge(Meal::onCreate(), [
-            'id' => 'required|exists:meals,id'
-        ]);
+        return request()->isMethod('PUT') ? Menu::onEdit() : Menu::onCreate();
     }
 }

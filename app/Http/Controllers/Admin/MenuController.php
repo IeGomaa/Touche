@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\MenuInterface;
-use App\Http\Requests\Admin\Menu\CreateMenuRequest;
 use App\Http\Requests\Admin\Menu\DeleteMenuRequest;
-use App\Http\Requests\Admin\Menu\EditMenuRequest;
+use App\Http\Requests\Admin\Menu\MenuRequest;
 
 class MenuController extends Controller
 {
@@ -26,7 +25,7 @@ class MenuController extends Controller
         return $this->menuInterface->create();
     }
 
-    public function store(CreateMenuRequest $request)
+    public function store(MenuRequest $request)
     {
         return $this->menuInterface->store($request);
     }
@@ -41,7 +40,7 @@ class MenuController extends Controller
         return $this->menuInterface->update($menu_id);
     }
 
-    public function edit(EditMenuRequest $request)
+    public function edit(MenuRequest $request)
     {
         return $this->menuInterface->edit($request);
     }

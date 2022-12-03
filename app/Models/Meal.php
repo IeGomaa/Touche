@@ -30,6 +30,15 @@ class Meal extends Model
         ];
     }
 
+    public static function onUpdate()
+    {
+        return [
+            'name' => 'required|unique:meals,name,' . request('id'),
+            'type' => 'required',
+            'id' => 'required|exists:meals,id'
+        ];
+    }
+
     public function getImageAttribute($value)
     {
         return 'uploaded/meal/' . $value;

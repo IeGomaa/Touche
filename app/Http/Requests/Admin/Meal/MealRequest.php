@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin\Meal;
 use App\Models\Meal;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateMealRequest extends FormRequest
+class MealRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class CreateMealRequest extends FormRequest
      */
     public function rules()
     {
-        return array_merge(Meal::onCreate(), Meal::imageRequired());
+        return request()->isMethod('PUT') ? Meal::onUpdate() : Meal::onCreate() ;
     }
 }
