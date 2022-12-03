@@ -8,6 +8,6 @@ interface MenuInterface
     public function create();
     public function store($request);
     public function delete($request);
-    public function update($request);
+    public function update($menu_id);
     public function edit($request);
 }

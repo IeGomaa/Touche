@@ -48,7 +48,7 @@
 
                                     <input type="hidden" name="id" value="{{$menu->id}}">
                                     <div class="form-group mb-4">
-                                        <input type="text" name="title" value="{{$menu->title}}" class="form-control @error('name') is-invalid @enderror" placeholder="Title">
+                                        <input type="text" name="title" value="{{old('title',$menu->title)}}" class="form-control @error('name') is-invalid @enderror" placeholder="Title">
                                     </div>
 
                                     @error('title')
@@ -63,14 +63,14 @@
 
                                         <select name="category_id" class="selectpicker" tabindex="-98">
                                             @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{old('$category_id',$category->id)}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
 
                                     </div>
 
                                     <div class="form-group mb-4">
-                                        <input type="text" name="price" value="{{$menu->price}}" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
+                                        <input type="text" name="price" value="{{old('price',$menu->price)}}" class="form-control @error('price') is-invalid @enderror" placeholder="Price">
                                     </div>
 
                                     @error('price')
@@ -85,7 +85,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Body</span>
                                         </div>
-                                        <textarea class="form-control @error('body') is-invalid @enderror" name="body" aria-label="With textarea">{{$menu->body}}</textarea>
+                                        <textarea class="form-control @error('body') is-invalid @enderror" name="body" aria-label="With textarea">{{old('body',$menu->body)}}</textarea>
                                     </div>
 
                                     @error('body')

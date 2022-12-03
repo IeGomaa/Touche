@@ -42,9 +42,9 @@ class CategoryRepository implements CategoryInterface
         return back();
     }
 
-    public function update($request)
+    public function update($category_id)
     {
-        $category = $this->categoryRecord($request->id);
+        $category = $this->categoryRecord($category_id);
         return view('Admin.category.edit', compact('category'));
     }
 

@@ -44,16 +44,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($categories as $category)
+                                            @forelse($categories as $category)
                                                 <tr>
                                                     <td>{{$category->id}}</td>
                                                     <td>{{$category->name}}</td>
                                                     <td>
-                                                        <form action="{{route('admin.category.update')}}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="id" value="{{$category->id}}">
-                                                            <input type="submit" class="btn btn-primary" value="Update">
-                                                        </form>
+                                                        <a href="{{route('admin.category.update',[$category->id])}}">
+                                                            <button class="btn btn-warning">Update</button>
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <form action="{{route('admin.category.delete')}}" method="post">
@@ -64,7 +62,16 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+
+                                            @empty
+
+                                                <tr style="text-align: center">
+                                                    <td colspan="4">
+                                                        <h4>No Data In Category Table !</h4>
+                                                    </td>
+                                                </tr>
+
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

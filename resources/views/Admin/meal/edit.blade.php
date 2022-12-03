@@ -48,7 +48,7 @@
                                     <input type="hidden" name="id" value="{{$meal->id}}">
 
                                     <div class="form-group mb-4">
-                                        <input type="text" name="name" value="{{$meal->name}}" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name">
+                                        <input type="text" name="name" value="{{old('name',$meal->name)}}" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name">
                                     </div>
 
                                     @error('name')
@@ -61,13 +61,21 @@
 
                                     <div class="btn-group bootstrap-select show-tick">
 
-                                        <select name="type" class="selectpicker" tabindex="-98">
+                                        <select name="type" class="selectpicker @error('type') is-invalid @enderror" tabindex="-98">
                                             <option name="breakfast">breakfast</option>
                                             <option name="lunch">lunch</option>
                                             <option name="dinner">dinner</option>
                                         </select>
 
                                     </div>
+
+                                    @error('type')
+                                    <div class="alert alert-danger mt-1" role="alert">
+                                        <div class="alert-body">
+                                            {{ $message }}
+                                        </div>
+                                    </div>
+                                    @enderror
 
 
                                     <div class="custom-file-container" data-upload-id="myFirstImage">

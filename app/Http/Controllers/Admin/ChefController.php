@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\ChefInterface;
-use App\Http\Requests\Admin\Category\EditCategoryRequest;
-use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Http\Requests\Admin\Chef\CreateChefRequest;
 use App\Http\Requests\Admin\Chef\DeleteChefRequest;
+use App\Http\Requests\Admin\Chef\EditChefRequest;
 
 class ChefController extends Controller
 {
@@ -38,12 +37,12 @@ class ChefController extends Controller
         return $this->chefInterface->delete($request);
     }
 
-    public function update(UpdateCategoryRequest $request)
+    public function update($chef_id)
     {
-        return $this->chefInterface->update($request);
+        return $this->chefInterface->update($chef_id);
     }
 
-    public function edit(EditCategoryRequest $request)
+    public function edit(EditChefRequest $request)
     {
         return $this->chefInterface->edit($request);
     }

@@ -57,13 +57,21 @@
 
                                     <div class="btn-group bootstrap-select show-tick">
 
-                                        <select name="type" class="selectpicker" tabindex="-98">
+                                        <select name="type" class="selectpicker @error('type') is-invalid @enderror" tabindex="-98">
                                             <option name="breakfast">breakfast</option>
                                             <option name="lunch">lunch</option>
                                             <option name="dinner">dinner</option>
                                         </select>
 
                                     </div>
+
+                                    @error('type')
+                                    <div class="alert alert-danger mt-1" role="alert">
+                                        <div class="alert-body">
+                                            {{ $message }}
+                                        </div>
+                                    </div>
+                                    @enderror
 
 
                                     <div class="custom-file-container" data-upload-id="myFirstImage">

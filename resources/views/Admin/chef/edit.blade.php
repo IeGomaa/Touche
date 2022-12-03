@@ -48,25 +48,49 @@
                                         <input type="hidden" name="id" value="{{$chef->id}}">
 
                                         <div class="form-group mb-4">
-                                            <input type="text" name="name" value="{{$chef->name}}" class="form-control" placeholder="Full Name">
+                                            <input type="text" name="name" value="{{old('name',$chef->name)}}" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name">
                                         </div>
+
+                                        @error('name')
+                                        <div class="alert alert-danger mt-1" role="alert">
+                                            <div class="alert-body">
+                                                {{ $message }}
+                                            </div>
+                                        </div>
+                                        @enderror
 
                                         <div class="input-group mb-4">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Description</span>
                                             </div>
-                                            <textarea class="form-control" name="description" aria-label="With textarea">{{$chef->description}}</textarea>
+                                            <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea">{{old('description',$chef->description)}}</textarea>
                                         </div>
+
+                                        @error('description')
+                                        <div class="alert alert-danger mt-1" role="alert">
+                                            <div class="alert-body">
+                                                {{ $message }}
+                                            </div>
+                                        </div>
+                                        @enderror
 
                                         <div class="custom-file-container" data-upload-id="myFirstImage">
                                             <label>Upload Image <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
                                             <label class="custom-file-container__custom-file" >
-                                                <input type="file" name="image" class="custom-file-container__custom-file__custom-file-input" accept="image/*">
+                                                <input type="file" name="image" class="custom-file-container__custom-file__custom-file-input @error('image') is-invalid @enderror" accept="image/*">
                                                 <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                                 <span class="custom-file-container__custom-file__custom-file-control"></span>
                                             </label>
                                             <div class="custom-file-container__image-preview"></div>
                                         </div>
+
+                                        @error('image')
+                                        <div class="alert alert-danger mt-1" role="alert">
+                                            <div class="alert-body">
+                                                {{ $message }}
+                                            </div>
+                                        </div>
+                                        @enderror
 
                                         <button type="submit" class="btn btn-primary mt-4">Send</button>
 

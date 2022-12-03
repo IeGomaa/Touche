@@ -46,7 +46,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($chefs as $chef)
+                                            @forelse($chefs as $chef)
                                                 <tr>
                                                     <td>{{$chef->id}}</td>
                                                     <td>{{$chef->name}}</td>
@@ -55,11 +55,9 @@
                                                         <img width="150" src="{{asset($chef->image)}}" alt="chef">
                                                     </td>
                                                     <td>
-                                                        <form action="{{route('admin.chef.update')}}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="id" value="{{$chef->id}}">
-                                                            <input type="submit" class="btn btn-primary" value="Update">
-                                                        </form>
+                                                        <a href="{{route('admin.chef.update',[$chef->id])}}">
+                                                            <button class="btn btn-warning">Update</button>
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <form action="{{route('admin.chef.delete')}}" method="post">
@@ -70,7 +68,13 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <tr style="text-align: center">
+                                                    <td colspan="6">
+                                                        <h4>No Data In Chef Table !</h4>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

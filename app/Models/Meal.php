@@ -25,7 +25,7 @@ class Meal extends Model
     public static function onCreate()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|unique:meals,name',
             'type' => 'required'
         ];
     }

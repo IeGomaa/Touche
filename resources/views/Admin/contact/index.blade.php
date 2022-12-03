@@ -41,7 +41,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($messages as $message)
+                                            @forelse($messages as $message)
                                                 <tr>
                                                     <td>{{$message->id}}</td>
                                                     <td>{{$message->name}}</td>
@@ -56,7 +56,13 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <tr style="text-align: center">
+                                                    <td colspan="5">
+                                                        <h4>No Data In Contact Table !</h4>
+                                                    </td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

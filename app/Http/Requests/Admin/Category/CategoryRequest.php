@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Menu;
+namespace App\Http\Requests\Admin\Category;
 
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMenuRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +24,6 @@ class UpdateMenuRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'id' => 'required|exists:menus,id'
-        ];
+        return request()->isMethod('PUT') ? Category::onUpdate() : Category::onCreate();
     }
 }

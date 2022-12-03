@@ -7,7 +7,6 @@ use App\Http\Interfaces\Admin\MenuInterface;
 use App\Http\Requests\Admin\Menu\CreateMenuRequest;
 use App\Http\Requests\Admin\Menu\DeleteMenuRequest;
 use App\Http\Requests\Admin\Menu\EditMenuRequest;
-use App\Http\Requests\Admin\Menu\UpdateMenuRequest;
 
 class MenuController extends Controller
 {
@@ -37,9 +36,9 @@ class MenuController extends Controller
         return $this->menuInterface->delete($request);
     }
 
-    public function update(UpdateMenuRequest $request)
+    public function update($menu_id)
     {
-        return $this->menuInterface->update($request);
+        return $this->menuInterface->update($menu_id);
     }
 
     public function edit(EditMenuRequest $request)

@@ -14,7 +14,15 @@ class Category extends Model
     public static function onCreate()
     {
         return [
-            'name' => 'required'
+            'name' => 'required|unique:categories,name'
+        ];
+    }
+
+    public static function onUpdate()
+    {
+        return [
+            'name' => 'required|unique:categories,name,' . request('id'),
+            'id'   => 'required|exists:categories,id'
         ];
     }
 

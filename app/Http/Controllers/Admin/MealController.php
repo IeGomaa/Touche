@@ -7,8 +7,6 @@ use App\Http\Interfaces\Admin\MealInterface;
 use App\Http\Requests\Admin\Meal\CreateMealRequest;
 use App\Http\Requests\Admin\Meal\DeleteMealRequest;
 use App\Http\Requests\Admin\Meal\EditMealRequest;
-use App\Http\Requests\Admin\Meal\UpdateMealRequest;
-use Illuminate\Http\Request;
 
 class MealController extends Controller
 {
@@ -39,9 +37,9 @@ class MealController extends Controller
         return $this->mealInterface->delete($request);
     }
 
-    public function update(UpdateMealRequest $request)
+    public function update($meal_id)
     {
-        return $this->mealInterface->update($request);
+        return $this->mealInterface->update($meal_id);
     }
 
     public function edit(EditMealRequest $request)

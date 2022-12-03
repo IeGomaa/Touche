@@ -51,9 +51,9 @@ class MealRepository implements MealInterface
         return back();
     }
 
-    public function update($request)
+    public function update($meal_id)
     {
-        $meal = $this->mealRecord($request->id);
+        $meal = $this->mealRecord($meal_id);
         return view('Admin.meal.edit', compact('meal'));
     }
 

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\CategoryInterface;
-use App\Http\Requests\Admin\Category\CreateCategoryRequest;
+use App\Http\Requests\Admin\Category\CategoryRequest;
 use App\Http\Requests\Admin\Category\DeleteCategoryRequest;
-use App\Http\Requests\Admin\Category\EditCategoryRequest;
-use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -28,7 +26,7 @@ class CategoryController extends Controller
         return $this->categoryInterface->create();
     }
 
-    public function store(CreateCategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
         return $this->categoryInterface->store($request);
     }
@@ -38,12 +36,12 @@ class CategoryController extends Controller
         return $this->categoryInterface->delete($request);
     }
 
-    public function update(UpdateCategoryRequest $request)
+    public function update($category_id)
     {
-        return $this->categoryInterface->update($request);
+        return $this->categoryInterface->update($category_id);
     }
 
-    public function edit(EditCategoryRequest $request)
+    public function edit(CategoryRequest $request)
     {
         return $this->categoryInterface->edit($request);
     }

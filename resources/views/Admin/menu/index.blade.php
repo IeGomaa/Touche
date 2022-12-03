@@ -47,7 +47,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($menus as $menu)
+                                            @forelse($menus as $menu)
                                                 <tr>
                                                     <td>{{$menu->id}}</td>
                                                     <td>{{$menu->title}}</td>
@@ -55,11 +55,9 @@
                                                     <td>{{$menu->price}}</td>
                                                     <td>{{$menu->category->name}}</td>
                                                     <td>
-                                                        <form action="{{route('admin.menu.update')}}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="id" value="{{$menu->id}}">
-                                                            <input type="submit" class="btn btn-primary" value="Update">
-                                                        </form>
+                                                        <a href="{{route('admin.menu.update',[$menu->id])}}">
+                                                            <button class="btn btn-warning">Update</button>
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <form action="{{route('admin.menu.delete')}}" method="post">
@@ -70,7 +68,13 @@
                                                         </form>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                                @empty
+                                                    <tr style="text-align: center">
+                                                        <td colspan="7">
+                                                            <h4>No Data In Menu Table !</h4>
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
                                         </tbody>
                                     </table>
                                 </div>

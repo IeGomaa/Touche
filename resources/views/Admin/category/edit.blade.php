@@ -48,11 +48,18 @@
                                         <input type="hidden" name="id" value="{{$category->id}}">
 
                                         <div class="form-group mb-4">
-                                            <input type="text" name="name" value="{{$category->name}}" class="form-control" placeholder="Full Name">
+                                            <input type="text" name="name" value="{{old('name',$category->name)}}" class="form-control @error('name') is-invalid @enderror" placeholder="Full Name">
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary mt-4">Send</button>
+                                        @error('name')
+                                        <div class="alert alert-danger mt-1" role="alert">
+                                            <div class="alert-body">
+                                                {{ $message }}
+                                            </div>
+                                        </div>
+                                        @enderror
 
+                                        <button type="submit" class="btn btn-primary mt-4">Send</button>
                                     </form>
 
                                 </div>

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
             Route::delete('/delete', 'delete')->name('delete');
-            Route::post('/update', 'update')->name('update');
+            Route::get('/update/{chef_id}', 'update')->name('update');
             Route::put('/edit', 'edit')->name('edit');
         });
     });
@@ -55,7 +55,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
             Route::delete('/delete', 'delete')->name('delete');
-            Route::post('/update', 'update')->name('update');
+            Route::get('/update/{meal_id}', 'update')->name('update');
             Route::put('/edit', 'edit')->name('edit');
         });
     });
@@ -67,7 +67,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
             Route::delete('/delete', 'delete')->name('delete');
-            Route::post('/update', 'update')->name('update');
+            Route::get('/update/{category_id}', 'update')->name('update');
             Route::put('/edit', 'edit')->name('edit');
         });
     });
@@ -79,7 +79,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
             Route::get('/create', 'create')->name('create');
             Route::post('/store', 'store')->name('store');
             Route::delete('/delete', 'delete')->name('delete');
-            Route::post('/update', 'update')->name('update');
+            Route::get('/update/{menu_id}', 'update')->name('update');
             Route::put('/edit', 'edit')->name('edit');
         });
     });

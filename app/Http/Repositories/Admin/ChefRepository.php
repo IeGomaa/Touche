@@ -50,9 +50,9 @@ class ChefRepository implements ChefInterface
         return back();
     }
 
-    public function update($request)
+    public function update($chef_id)
     {
-        $chef = $this->chefRecord($request->id);
+        $chef = $this->chefRecord($chef_id);
         return view('Admin.chef.edit', compact('chef'));
     }
 

@@ -47,9 +47,9 @@ class MenuRepository implements MenuInterface
         return back();
     }
 
-    public function update($request)
+    public function update($menu_id)
     {
-        $menu = $this->menuRecord($request->id);
+        $menu = $this->menuRecord($menu_id);
         $categories = $this->categoryRecords();
         return view('Admin.menu.edit', compact('menu','categories'));
     }
