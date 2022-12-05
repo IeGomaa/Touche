@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chef extends Model
 {
     use HasFactory;
+    const Model = 'chef';
 
     protected $fillable = [
         'image',
@@ -18,7 +19,7 @@ class Chef extends Model
     public static function imageRequired()
     {
         return [
-            'image' => 'required'
+            'image' => 'required|mimes:png,jpg,jpeg,webp'
         ];
     }
 
@@ -32,6 +33,6 @@ class Chef extends Model
 
     public function getImageAttribute($value)
     {
-        return 'uploaded/chef/' . $value;
+        return 'uploaded/' . self::Model . '/' . $value;
     }
 }

@@ -45,7 +45,7 @@ class AuthCommand extends Command
 
         if (User::where('email',$email)->first()) {
             $this->info('Sorry This Account Already Exists In Table User');
-            return 0;
+            return Command::FAILURE;
         }
 
         User::create([
@@ -54,6 +54,6 @@ class AuthCommand extends Command
             'password' => Hash::make($password)
         ]);
         $this->info('Account Was Created');
-        return 0;
+        return Command::SUCCESS;
     }
 }

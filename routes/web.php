@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EndUser\EndUserAuthController;
 use App\Http\Controllers\EndUser\EndUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => '/', 'as' => 'endUser.'], function () {
+Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+    Route::controller(EndUserAuthController::class)->group(function () {
+        Route::get('register','register_page')->name('register');
+        Route::get('login','login_page')->name('index');
+        Route::post('create','registerData')->name('create');
+        Route::post('signin','loginData')->name('login');
+    });
+});
+
+
+Route::group(['prefix' => '/', 'as' => 'endUser.', 'middleware' => 'client_auth'], function () {
     Route::controller(EndUserController::class)->group(function () {
         Route::get('/','index')->name('index');
         Route::get('/meal','meal')->name('meal');

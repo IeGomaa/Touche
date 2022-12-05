@@ -162,7 +162,7 @@
                         <div class="media mx-auto">
                             <img src="{{asset('AdminAssets/assets/img/90x90.jpg')}}" class="img-fluid mr-2" alt="avatar">
                             <div class="media-body">
-                                <h5>{{Auth::user()->name}}</h5>
+                                <h5>{{auth('web')->user()->name}}</h5>
                                 <p>Admin</p>
                             </div>
                         </div>

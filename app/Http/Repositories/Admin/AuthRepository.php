@@ -11,13 +11,13 @@ class AuthRepository implements AuthInterface
 
     public function index()
     {
-        return view('Auth.login');
+        return view('Admin.auth.login');
     }
 
     public function login($request)
     {
         $credentials = $request->only(['email','password']);
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials)) {
             return redirect(route('admin.index'));
         }
         return redirect(route('auth.index'));
@@ -26,7 +26,7 @@ class AuthRepository implements AuthInterface
     public function logout()
     {
         Session::flush();
-        Auth::logout();
+        Auth::guard('web')->logout();
         return redirect(route('auth.index'));
     }
 }
