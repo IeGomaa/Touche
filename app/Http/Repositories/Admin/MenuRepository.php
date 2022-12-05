@@ -4,7 +4,7 @@ namespace App\Http\Repositories\Admin;
 
 use App\Http\Interfaces\Admin\MenuInterface;
 use App\Http\Traits\CategoryTrait;
-use App\Http\Traits\MenuTrait;
+use App\Http\Traits\Redis\MenuRedis;
 use App\Models\Category;
 use App\Models\Menu;
 
@@ -12,7 +12,7 @@ class MenuRepository implements MenuInterface
 {
     private $menuModel;
     private $categoryModel;
-    use MenuTrait, CategoryTrait;
+    use MenuRedis, CategoryTrait;
 
     public function __construct(Menu $menu, Category $category)
     {
@@ -22,7 +22,7 @@ class MenuRepository implements MenuInterface
 
     public function index()
     {
-        $menus = $this->menuRecords();
+        $menus = $this->getMenuFromRedis();
         return view('Admin.menu.index', compact('menus'));
     }
 
@@ -35,6 +35,7 @@ class MenuRepository implements MenuInterface
     public function store($request)
     {
         $this->menuModel::create($request->validated());
+        $this->setMenuToRedis();
         toast('Menu Was Created !','success');
         return redirect(route('admin.menu.index'));
     }
@@ -43,6 +44,7 @@ class MenuRepository implements MenuInterface
     {
         $meal = $this->menuRecord($request->id);
         $meal->delete();
+        $this->setMenuToRedis();
         toast('Menu Was Deleted !','success');
         return back();
     }
@@ -73,6 +75,7 @@ class MenuRepository implements MenuInterface
             'category_id' => (isset($category_id)) ? $category_id : $menu->category_id
         ]);
 
+        $this->setMenuToRedis();
         toast('Menu Was Updated !','success');
         return redirect(route('admin.menu.index'));
     }

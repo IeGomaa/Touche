@@ -3,9 +3,9 @@
 namespace App\Http\Repositories\EndUser;
 
 use App\Http\Interfaces\EndUser\EndUserInterface;
-use App\Http\Traits\ChefTrait;
-use App\Http\Traits\MealTrait;
-use App\Http\Traits\MenuTrait;
+use App\Http\Traits\Redis\ChefRedis;
+use App\Http\Traits\Redis\MealRedis;
+use App\Http\Traits\Redis\MenuRedis;
 use App\Models\Chef;
 use App\Models\ContactUs;
 use App\Models\Meal;
@@ -17,8 +17,8 @@ class EndUserRepository implements EndUserInterface
     private $menuModel;
     private $mealModel;
 
-    use ChefTrait, MenuTrait, MealTrait{
-        MealTrait::uploadImage insteadof ChefTrait;
+    use ChefRedis, MenuRedis, MealRedis{
+        MealRedis::uploadImage insteadof ChefRedis;
     }
 
     public function __construct(Chef $chef, Menu $menu, Meal $meal)
@@ -30,27 +30,27 @@ class EndUserRepository implements EndUserInterface
 
     public function index()
     {
-        $chefs = $this->chefRecords();
-        $menus = $this->menuRecords();
-        $meals = $this->mealRecords();
+        $chefs = $this->getChefFromRedis();
+        $menus = $this->getMenuFromRedis();
+        $meals = $this->getMealFromRedis();
         return view('EndUser.index',compact('chefs','menus','meals'));
     }
 
     public function gallery()
     {
-        $meals = $this->mealRecords();
+        $meals = $this->getMealFromRedis();
         return view('EndUser.gallery',compact('meals'));
     }
 
     public function menu()
     {
-        $menus = $this->menuRecords();
+        $menus = $this->getMenuFromRedis();
         return view('EndUser.menu',compact('menus'));
     }
 
     public function chef()
     {
-        $chefs = $this->chefRecords();
+        $chefs = $this->getChefFromRedis();
         return view('EndUser.chefs',compact('chefs'));
     }
 

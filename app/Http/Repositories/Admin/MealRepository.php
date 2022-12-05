@@ -3,13 +3,13 @@
 namespace App\Http\Repositories\Admin;
 
 use App\Http\Interfaces\Admin\MealInterface;
-use App\Http\Traits\MealTrait;
+use App\Http\Traits\Redis\MealRedis;
 use App\Models\Meal;
 
 class MealRepository implements MealInterface
 {
     private $mealModel;
-    use MealTrait;
+    use MealRedis;
 
     public function __construct(Meal $meal)
     {
@@ -18,7 +18,7 @@ class MealRepository implements MealInterface
 
     public function index()
     {
-        $meals = $this->mealRecords();
+        $meals = $this->getMealFromRedis();
         return view('Admin.meal.index', compact('meals'));
     }
 
@@ -37,6 +37,7 @@ class MealRepository implements MealInterface
             'type' => $request->type
         ]);
 
+        $this->setMealToRedis();
         toast('Meal Was Created !','success');
         return redirect(route('admin.meal.index'));
     }
@@ -47,6 +48,7 @@ class MealRepository implements MealInterface
         unlink(public_path($meal->image));
 
         $meal->delete();
+        $this->setMealToRedis();
         toast('Meal Was Deleted !','success');
         return back();
     }
@@ -72,6 +74,7 @@ class MealRepository implements MealInterface
             'image' => (isset($imageName)) ? $imageName : $meal->getRawOriginal('image')
         ]);
 
+        $this->setMealToRedis();
         toast('Meal Was Updated !','success');
         return redirect(route('admin.meal.index'));
     }

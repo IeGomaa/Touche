@@ -4,12 +4,13 @@ namespace App\Http\Repositories\Admin;
 
 use App\Http\Interfaces\Admin\ChefInterface;
 use App\Http\Traits\ChefTrait;
+use App\Http\Traits\Redis\ChefRedis;
 use App\Models\Chef;
 
 class ChefRepository implements ChefInterface
 {
     private $chefModel;
-    use ChefTrait;
+    use ChefRedis;
 
     public function __construct(Chef $chef)
     {
@@ -18,7 +19,7 @@ class ChefRepository implements ChefInterface
 
     public function index()
     {
-        $chefs = $this->chefRecords();
+        $chefs = $this->getChefFromRedis();
         return view('Admin.chef.index', compact('chefs'));
     }
 
@@ -36,6 +37,7 @@ class ChefRepository implements ChefInterface
             'description' => $request->description
         ]);
 
+        $this->setChefToRedis();
         toast('chef Was Created !','success');
         return redirect(route('admin.chef.index'));
     }
@@ -46,6 +48,7 @@ class ChefRepository implements ChefInterface
         unlink(public_path($chef->image));
 
         $chef->delete();
+        $this->setChefToRedis();
         toast('chef Was Deleted !','success');
         return back();
     }
@@ -71,6 +74,7 @@ class ChefRepository implements ChefInterface
             'image' => (isset($imageName)) ? $imageName : $chef->getRawOriginal('image')
         ]);
 
+        $this->setChefToRedis();
         toast('chef Was Updated !','success');
         return redirect(route('admin.chef.index'));
     }
