@@ -14,9 +14,9 @@
                 <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-one">
                         <div class="widget-heading">
-                            <h5 class="">Revenue</h5>
+                            <h5 class="">{{ trans('localization.revenue') }}</h5>
                             <ul class="tabs tab-pills">
-                                <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">Monthly</a></li>
+                                <li><a href="javascript:void(0);" id="tb_1" class="tabmenu">{{ trans('localization.monthly')  }}</a></li>
                             </ul>
                         </div>
 
@@ -33,7 +33,7 @@
                 <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
                     <div class="widget widget-chart-two">
                         <div class="widget-heading">
-                            <h5 class="">Sales by Category</h5>
+                            <h5 class="">{{ trans('localization.sales by category') }}</h5>
                         </div>
                         <div class="widget-content">
                             <div id="chart-2" class=""></div>
@@ -46,8 +46,8 @@
                         <div class="widget-content">
                             <div class="w-numeric-value">
                                 <div class="w-content">
-                                    <span class="w-value">Daily sales</span>
-                                    <span class="w-numeric-title">Go to columns for details.</span>
+                                    <span class="w-value">{{ trans('localization.daily sales') }}</span>
+                                    <span class="w-numeric-title">{{ trans('localization.go to columns for details.') }}</span>
                                 </div>
                                 <div class="w-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
@@ -63,7 +63,7 @@
                 <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
                     <div class="widget-three">
                         <div class="widget-heading">
-                            <h5 class="">Summary</h5>
+                            <h5 class="">{{ __('localization.summary') }}</h5>
                         </div>
                         <div class="widget-content">
 
@@ -76,7 +76,7 @@
                                     <div class="w-summary-details">
 
                                         <div class="w-summary-info">
-                                            <h6>Income</h6>
+                                            <h6>{{ __('localization.income') }}</h6>
                                             <p class="summary-count">$92,600</p>
                                         </div>
 
@@ -97,7 +97,7 @@
                                     <div class="w-summary-details">
 
                                         <div class="w-summary-info">
-                                            <h6>Profit</h6>
+                                            <h6>{{ trans('localization.profit') }}</h6>
                                             <p class="summary-count">$37,515</p>
                                         </div>
 
@@ -118,7 +118,7 @@
                                     <div class="w-summary-details">
 
                                         <div class="w-summary-info">
-                                            <h6>Expenses</h6>
+                                            <h6>{{ __('localization.expenses') }}</h6>
                                             <p class="summary-count">$55,085</p>
                                         </div>
 

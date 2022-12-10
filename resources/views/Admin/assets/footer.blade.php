@@ -22,5 +22,15 @@
 @include('sweetalert::alert')
 @stack('js')
 
+<script>
+    function arablic() {
+        return  {{LaravelLocalization::getLocalizedURL('ar')}};
+    }
+
+    function english() {
+        return  {{LaravelLocalization::getLocalizedURL('en')}};
+    }
+</script>
+
 </body>
 </html>
