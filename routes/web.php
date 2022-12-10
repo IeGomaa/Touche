@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\EndUser\EndUserAuthController;
-use App\Http\Controllers\EndUser\EndUserController;
+use App\Http\Controllers\Web\EndUser\EndUserAuthController;
+use App\Http\Controllers\Web\EndUser\EndUserController;
 use Illuminate\Support\Facades\Route;
 
 /*

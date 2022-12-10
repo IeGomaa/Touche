@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\ChefController;
-use App\Http\Controllers\Admin\ContactUsController;
-use App\Http\Controllers\Admin\MealController;
-use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Web\Admin\AdminController;
+use App\Http\Controllers\Web\Admin\AuthController;
+use App\Http\Controllers\Web\Admin\CategoryController;
+use App\Http\Controllers\Web\Admin\ChefController;
+use App\Http\Controllers\Web\Admin\ContactUsController;
+use App\Http\Controllers\Web\Admin\MealController;
+use App\Http\Controllers\Web\Admin\MenuController;
 use Illuminate\Support\Facades\Route;
 
 /*
