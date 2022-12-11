@@ -2,11 +2,17 @@
 
 namespace App\Exceptions;
 
+use App\Http\Traits\Api\apiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use apiResponse;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -37,5 +43,20 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($e instanceof NotFoundHttpException) {
+            return $this->apiResponse(404,$request->url() . ' Sorry Url Not Found Try Again With Correct Url :(');
+        }
+
+        if ($e instanceof MethodNotAllowedHttpException) {
+            return $this->apiResponse(405,$request->method() . ' Sorry Method Not Allowed Here Try Again With Correct Http Method :(');
+        }
+
+        if ($e instanceof ValidationException) {
+            return $this->apiResponse(422,'Validation Error :(',null,$e->errors());
+        }
     }
 }

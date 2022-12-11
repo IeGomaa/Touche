@@ -49,6 +49,39 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Http\Interfaces\Web\EndUser\EndUserAuthInterface',
             'App\Http\Repositories\Web\EndUser\EndUserAuthRepository'
         );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\Admin\ApiCategoryInterface',
+            'App\Http\Repositories\Api\Admin\ApiCategoryRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\Admin\ApiMealInterface',
+            'App\Http\Repositories\Api\Admin\ApiMealRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\Admin\ApiChefInterface',
+            'App\Http\Repositories\Api\Admin\ApiChefRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\Admin\ApiMenuInterface',
+            'App\Http\Repositories\Api\Admin\ApiMenuRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\Admin\ApiContactUsInterface',
+            'App\Http\Repositories\Api\Admin\ApiContactUsRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\EndUser\ApiUserInterface',
+            'App\Http\Repositories\Api\EndUser\ApiUserRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\Admin\ApiAuthInterface',
+            'App\Http\Repositories\Api\Admin\ApiAuthRepository'
+        );
+        $this->app->bind(
+            'App\Http\Interfaces\Api\EndUser\ApiEndUserAuthInterface',
+            'App\Http\Repositories\Api\EndUser\ApiEndUserAuthRepository'
+        );
+
     }
 
     /**

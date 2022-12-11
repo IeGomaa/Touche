@@ -1,6 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Admin\ApiCategoryController;
+use App\Http\Controllers\Api\Admin\ApiChefController;
+use App\Http\Controllers\Api\Admin\ApiContactUsController;
+use App\Http\Controllers\Api\Admin\ApiMealController;
+use App\Http\Controllers\Api\Admin\ApiMenuController;
+use App\Http\Controllers\Api\EndUser\ApiUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +19,61 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::controller(ApiCategoryController::class)->group(function () {
+            Route::get('/','index');
+            Route::post('/create','create');
+            Route::post('/delete','delete');
+            Route::post('/update','update');
+        });
+    });
+
+    Route::group(['prefix' => 'meal'], function () {
+        Route::controller(ApiMealController::class)->group(function () {
+            Route::get('/','index');
+            Route::post('/create','create');
+            Route::post('/delete','delete');
+            Route::post('/update','update');
+        });
+    });
+
+    Route::group(['prefix' => 'chef'], function () {
+        Route::controller(ApiChefController::class)->group(function () {
+            Route::get('/','index');
+            Route::post('/create','create');
+            Route::post('/delete','delete');
+            Route::post('/update','update');
+        });
+    });
+
+    Route::group(['prefix' => 'menu'], function () {
+        Route::controller(ApiMenuController::class)->group(function () {
+            Route::get('/','index');
+            Route::post('/create','create');
+            Route::post('/delete','delete');
+            Route::post('/update','update');
+        });
+    });
+
+    Route::group(['prefix' => 'contact'], function () {
+        Route::controller(ApiContactUsController::class)->group(function () {
+            Route::get('/','index');
+            Route::post('/delete','delete');
+        });
+    });
+
+});
+
+Route::group(['prefix' => '/'], function () {
+    Route::controller(ApiUserController::class)->group(function () {
+        Route::get('index','index');
+        Route::get('gallery','gallery');
+        Route::get('menu','menu');
+        Route::get('chef','chef');
+        Route::post('contact','contact');
+    });
 });
