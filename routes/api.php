@@ -26,11 +26,12 @@ use Illuminate\Support\Facades\Route;
  */
 
 
+
 /**
  * End User Web Routes
  */
 
-Route::group(['prefix' => '/'], function () {
+Route::group(['prefix' => '/', 'middleware' => 'client_auth_api'], function () {
     Route::controller(ApiUserController::class)->group(function () {
         Route::get('index','index');
         Route::get('gallery','gallery');
