@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\Admin\ApiChefController;
 use App\Http\Controllers\Api\Admin\ApiContactUsController;
 use App\Http\Controllers\Api\Admin\ApiMealController;
 use App\Http\Controllers\Api\Admin\ApiMenuController;
-use App\Http\Controllers\Api\EndUser\ApiEndUserAuthController;
+use App\Http\Controllers\Api\EndUser\ApiAuthEndUserController;
 use App\Http\Controllers\Api\EndUser\ApiUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,13 +25,26 @@ use Illuminate\Support\Facades\Route;
  * End User Login Routes
  */
 
-
+Route::group(['middleware' => 'api','prefix' => 'touche'], function () {
+    Route::controller(ApiAuthEndUserController::class)->group(function () {
+        Route::post('/login', 'login');
+        Route::post('/login', 'login');
+        Route::post('/register', 'register');
+    });
+});
 
 /**
  * End User Web Routes
  */
 
 Route::group(['prefix' => '/', 'middleware' => 'client_auth_api'], function () {
+
+    Route::controller(ApiAuthEndUserController::class)->group(function () {
+        Route::post('/logout', 'logout');
+        Route::post('/refresh', 'refresh');
+        Route::get('/user-profile', 'userProfile');
+    });
+
     Route::controller(ApiUserController::class)->group(function () {
         Route::get('index','index');
         Route::get('gallery','gallery');
@@ -39,6 +52,7 @@ Route::group(['prefix' => '/', 'middleware' => 'client_auth_api'], function () {
         Route::get('chef','chef');
         Route::post('contact','contact');
     });
+
 });
 
 

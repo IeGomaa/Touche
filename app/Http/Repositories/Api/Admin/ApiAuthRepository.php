@@ -58,8 +58,6 @@ class ApiAuthRepository implements ApiAuthInterface
     private function createNewToken($token){
         $data = [
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
             'user' => auth('api')->user()
         ];
         return $this->apiResponse(401, 'Successful Login', $data);
