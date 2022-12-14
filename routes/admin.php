@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Admin\ContactUsController;
 use App\Http\Controllers\Web\Admin\MealController;
 use App\Http\Controllers\Web\Admin\MenuController;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,69 +28,78 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
    });
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
 
-    /*--- Admin Routes ---*/
-    Route::controller(AdminController::class)->group(function () {
-        Route::get('/','index')->name('index');
-    });
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    /*--- Chef Routes ---*/
-    Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
-        Route::controller(ChefController::class)->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::delete('/delete', 'delete')->name('delete');
-            Route::get('/update/{chef_id}', 'update')->name('update');
-            Route::put('/edit', 'edit')->name('edit');
+        /*--- Admin Routes ---*/
+        Route::controller(AdminController::class)->group(function () {
+            Route::get('/','index')->name('index');
         });
-    });
 
-    /*--- Meal Routes ---*/
-    Route::group(['prefix' => 'meal', 'as' => 'meal.'], function () {
-        Route::controller(MealController::class)->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::delete('/delete', 'delete')->name('delete');
-            Route::get('/update/{meal_id}', 'update')->name('update');
-            Route::put('/edit', 'edit')->name('edit');
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+        /*--- Chef Routes ---*/
+        Route::group(['prefix' => 'chef', 'as' => 'chef.'], function () {
+            Route::controller(ChefController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::delete('/delete', 'delete')->name('delete');
+                Route::get('/update/{chef_id}', 'update')->name('update');
+                Route::put('/edit', 'edit')->name('edit');
+            });
         });
-    });
 
-    /*--- Category Routes ---*/
-    Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
-        Route::controller(CategoryController::class)->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::delete('/delete', 'delete')->name('delete');
-            Route::get('/update/{category_id}', 'update')->name('update');
-            Route::put('/edit', 'edit')->name('edit');
+        /*--- Meal Routes ---*/
+        Route::group(['prefix' => 'meal', 'as' => 'meal.'], function () {
+            Route::controller(MealController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::delete('/delete', 'delete')->name('delete');
+                Route::get('/update/{meal_id}', 'update')->name('update');
+                Route::put('/edit', 'edit')->name('edit');
+            });
         });
-    });
 
-    /*--- Menu Routes ---*/
-    Route::group(['prefix' => 'menu', 'as' => 'menu.'], function () {
-        Route::controller(MenuController::class)->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/create', 'create')->name('create');
-            Route::post('/store', 'store')->name('store');
-            Route::delete('/delete', 'delete')->name('delete');
-            Route::get('/update/{menu_id}', 'update')->name('update');
-            Route::put('/edit', 'edit')->name('edit');
+        /*--- Category Routes ---*/
+        Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
+            Route::controller(CategoryController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::delete('/delete', 'delete')->name('delete');
+                Route::get('/update/{category_id}', 'update')->name('update');
+                Route::put('/edit', 'edit')->name('edit');
+            });
         });
-    });
 
-    /*--- Menu Routes ---*/
-    Route::group(['prefix' => 'contact', 'as' => 'contact.'], function () {
-        Route::controller(ContactUsController::class)->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::delete('/delete', 'delete')->name('delete');
+        /*--- Menu Routes ---*/
+        Route::group(['prefix' => 'menu', 'as' => 'menu.'], function () {
+            Route::controller(MenuController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/store', 'store')->name('store');
+                Route::delete('/delete', 'delete')->name('delete');
+                Route::get('/update/{menu_id}', 'update')->name('update');
+                Route::put('/edit', 'edit')->name('edit');
+            });
         });
-    });
 
+        /*--- Menu Routes ---*/
+        Route::group(['prefix' => 'contact', 'as' => 'contact.'], function () {
+            Route::controller(ContactUsController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::delete('/delete', 'delete')->name('delete');
+            });
+        });
+
+    });
 });
+
+

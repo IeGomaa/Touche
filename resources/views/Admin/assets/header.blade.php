@@ -5,19 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{asset('AdminAssets/assets/img/favicon.ico')}}"/>
-    <link href="{{asset('AdminAssets/assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
-    <script src="{{asset('AdminAssets/assets/js/loader.js')}}"></script>
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
-    <link href="{{asset('AdminAssets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('AdminAssets/assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
-    <!-- END GLOBAL MANDATORY STYLES -->
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-    <link href="{{asset('AdminAssets/plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('AdminAssets/assets/css/dashboard/dash_2.css')}}" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+    @if(LaravelLocalization::getCurrentLocale() == 'en')
+        <link rel="icon" type="image/x-icon" href="{{asset('AdminAssets/assets/img/favicon.ico')}}"/>
+        <link href="{{asset('AdminAssets/assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
+        <script src="{{asset('AdminAssets/assets/js/loader.js')}}"></script>
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+        <link href="{{asset('AdminAssets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('AdminAssets/assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+
+        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+        <link href="{{asset('AdminAssets/plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('AdminAssets/assets/css/dashboard/dash_2.css')}}" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    @else
+        <link rel="icon" type="image/x-icon" href="{{asset('AdminAssetsRTL/assets/img/favicon.ico')}}"/>
+        <link href="{{asset('AdminAssetsRTL/assets/css/loader.css')}}" rel="stylesheet" type="text/css" />
+        <script src="{{asset('AdminAssetsRTL/assets/js/loader.js')}}"></script>
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+        <link href="{{asset('AdminAssetsRTL/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('AdminAssetsRTL/assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+
+        <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+        <link href="{{asset('AdminAssetsRTL/plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('AdminAssetsRTL/assets/css/dashboard/dash_2.css')}}" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    @endif
+
     @stack('css')
 </head>
 <body class="alt-menu sidebar-noneoverflow">
@@ -48,10 +68,8 @@
                     <img src="{{asset('AdminAssets/assets/img/ca.png')}}" class="flag-width" alt="flag">
                 </a>
                 <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('AdminAssets/assets/img/de.png')}}" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;German</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('AdminAssets/assets/img/jp.png')}}" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Japanese</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('AdminAssets/assets/img/fr.png')}}" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;French</span></a>
-                    <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="{{asset('AdminAssets/assets/img/ca.png')}}" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
+                    <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="arablic()"><img src="{{asset('AdminAssets/assets/img/eg.png')}}" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ trans('localization.egypt') }}</span></a>
+                    <a class="dropdown-item d-flex" href="javascript:void(0);" onclick="english()"><img src="{{asset('AdminAssets/assets/img/ca.png')}}" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ trans('localization.english') }}</span></a>
                 </div>
             </li>
 
